@@ -1,23 +1,2 @@
-import pytest
-from app import app
-
-@pytest.fixture
-def client():
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
-
-def test_home(client):
-    """Test if home route works"""
-    response = client.get('/')
-    assert response.status_code == 200
-    assert b"Welcome" in response.data or b"Expense" in response.data
-
-def test_add_expense(client):
-    """Test adding expense (POST)"""
-    response = client.post('/add', json={
-        "name": "Test Expense",
-        "amount": 100,
-        "category": "Food"
-    })
-    assert response.status_code in (200, 201)
+flask
+pytest
